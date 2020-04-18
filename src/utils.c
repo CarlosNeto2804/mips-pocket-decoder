@@ -62,6 +62,7 @@ char *itoa2(int val, char *str)
 
 	return str;
 }
+  
 void __checkfail(int x, const char *msg, const char *filename, int linenum)
 {
 	if (!x)
@@ -69,19 +70,4 @@ void __checkfail(int x, const char *msg, const char *filename, int linenum)
 		fprintf(stderr, "%s: %s %d\n", msg, filename, linenum);
 		exit(EXIT_FAILURE);
 	}
-}
-int converter(int num)
-{
-   int length;
-   int aux;
-   int bin[5]; // <---------------
-   for (aux = 4; aux >= 0; aux--)
-   {
-      if (num % 2 == 0)
-         bin[aux] = 0;
-      else
-         bin[aux] = 1;
-      num = num / 2;
-   }
-   return bin;
 }

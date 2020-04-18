@@ -11,25 +11,21 @@
 #define INST_NAME_HALT "HALT"
 #define INST_NAME_ADDI "ADDI"
 #define INST_NAME_BEQ "BEQ"
-
-// r
-#define INST_NAME_ADD "ADD"
 // Instrução em String
-#define INST_CODE_ADD "000"
-#define INST_CODE_SUB "010"
-#define INST_CODE_MTA "110"
-#define INST_CODE_MTB "110"
-#define INST_CODE_MFA "111"
-#define INST_CODE_MFB "111"
-#define INST_CODE_HALT "111 000 11"
-#define INST_CODE_ADDI "001"
-#define INST_CODE_BEQ "011"
+#define INST_OPCODE_ADD "000"
+#define INST_OPCODE_SUB "010"
+#define INST_OPCODE_MTA "110"
+#define INST_OPCODE_MTB "110"
+#define INST_OPCODE_MFA "111"
+#define INST_OPCODE_MFB "111"
+#define INST_OPCODE_HALT "111 000 11"
+#define INST_OPCODE_ADDI "001"
+#define INST_OPCODE_BEQ "011"
 
 struct inst
-{
-    const char *name;
-    const char *code;
-    void (*encode)(FILE *, const char *);
+{       const char *name;                    
+		const char *opcode;                   
+		void (*encode)(FILE *, const char *); 
 };
 
 #endif //  MIPS_INST_H_
