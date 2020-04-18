@@ -24,7 +24,21 @@ static const char *opcode_lookup(const char *inst)
     return (NULL);
 }
 
-static void encode_i_instruction(FILE *output, const char *inst){
+static const char *register_lookup(const char *register_name)
+{
+	if (register_name == NULL)
+		return (NULL);
+
+	for (int i = 0; i < REG_NUM; i++)
+	{
+		if (!strcmp(registers[i].name, register_name))
+			return (registers[i].code);
+	}
+
+	return (NULL);
+}
+
+static void encode_addi_instruction(FILE *output, const char *inst){
     const char *opcode;
     const char *branch10;
     char branch2[33];
@@ -33,15 +47,30 @@ static void encode_i_instruction(FILE *output, const char *inst){
     itoa2(atoi(branch10), branch2, 2);
     fprintf(output, "%s %s\n", opcode, &branch2[27]);
 }
+static void encode_beq_instruction(FILE *output, const char *inst){
+	const char *opcode;
+    const char *rt;
+	const char *rs;
+    check((rt = register_lookup(strtok(NULL, delim))) != NULL);
+	check((rs = register_lookup(strtok(NULL, delim))) != NULL);
+	check((opcode = opcode_lookup(inst)) != NULL);
+	fprintf(output, "%s %s %s 0\n", opcode,rt,rs);
+}
 
 
 static void encode_addi(FILE *output, const char *inst)
 {
-	encode_i_instruction(output, inst);
+	encode_addi_instruction(output, inst);
+}
+static void encode_beq(FILE *output, const char *inst)
+{
+	encode_beq_instruction(output, inst);
 }
 
 struct inst instructions[] = {
 	{INST_NAME_ADDI, INST_OPCODE_ADDI,  encode_addi},
+	{INST_NAME_BEQ, INST_OPCODE_BEQ,  encode_beq},
+    {NULL, NULL,  NULL},
 };
 
 struct regs registers[] = {

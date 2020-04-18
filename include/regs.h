@@ -1,6 +1,8 @@
 #ifndef MIPS_REGS_H_
 #define MIPS_REGS_H_
 
+#define REG_NUM 4
+
 #define REG_R0_NAME "r0"
 #define REG_R1_NAME "r1"
 #define REG_R2_NAME "r2"
