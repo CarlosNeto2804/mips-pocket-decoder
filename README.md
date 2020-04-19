@@ -35,7 +35,7 @@ Operações aceitas:
 - MFB
 - HALT
 
-A sintaxe para executar instruções do **tipo r** é informar o nome da instrução seguida do código do registrador:
+A sintaxe para executar instruções do **tipo R** é informar o nome da instrução seguida do código do registrador:
 #### Exemplo
 ```bash
 # exemplo de entrada 
@@ -51,7 +51,7 @@ ___
 Operações aceitas:
 - ADDI
 ### Exemplos
-A sintaxe para executar instruções do **tipo i** é informar o nome da instrução seguida de um número inteiro de 0 a 31:
+A sintaxe para executar instruções do **tipo I** é informar o nome da instrução seguida de um número inteiro de 0 a 31:
 ```bash
 # exemplo de entrada 
 $ ADDI 6
@@ -66,7 +66,7 @@ ___
 Operações aceitas:
 - BEQ
 ### Exemplos
-A sintaxe para executar instruções do **tipo i** é informar o nome da instrução e em seguida o codigo de dois registradores:
+A sintaxe para executar instruções do **tipo J** é informar o nome da instrução e em seguida o codigo de dois registradores:
 ```bash
 # exemplo de entrada 
 $ BEQ r0, r1
