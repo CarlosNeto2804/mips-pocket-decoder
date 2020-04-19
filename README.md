@@ -1,9 +1,23 @@
 # Decodificador Mips Pocket
+**Descrição:** o nível mais baixo de programação de um hardware computadorizado é comumente apresentado como nível assembly (montagem). Nesse nível, só existem comandos básicos, bem simples, que indicam ao hardware (processador ou microcontrolador) uma tarefa bem específica. O sistema implementa exemplos de instruções de um processador simples e bem específico denominado Pocket MIPS Monocycle (PMM). 
 
-
-**Descrição:** o nível mais baixo de programação de um hardware computadorizado é comumente apresentado como nível assembly (montagem). Nesse nível, só existem comandos básicos, bem simples, que indicam ao hardware (processador ou microcontrolador) uma tarefa bem específica. A Tabela a seguir apresenta exemplos de instruções de um processador simples e bem específico denominado Pocket MIPS Monocycle (PMM).  Observe que a 1a. coluna indica o nome (mnemônico da instrução), a 2a. coluna indica a sintaxe de utilização da instrução, a 3a. coluna mostra a ação realizada em cada instrução. A 4a. e última coluna apresenta o formato (código binário de máquina) de cada instrução. Em instruções em que há sequências de XXX, isso significa que os respectivos bits são Don't care (não importa valor que possuem). Observe finalmente que cada instrução, independente da sua funcionalidade, possui tamanho de 8 bits.
-
-## Testes
+## Execução e Teste
+### Criar executável
+Para criar o executável do projeto basta executar o arquivo **Makefile**
+dentro da pasta do projeto:
+```bash
+$ make
+```
+Isso irá gerar uma basta **bin** que contém o executável da aplicação. Para iniciar basta rodar o executável:
+```bash
+$./bin/decoder-mips-pocket
+```
+**Dica:** a pasta __tests__ contém arquivos que possuem entradas válidas para automatizar  os testes.
+```bash
+# exemplo de execução com testes pré implementados
+$ ./bin/decoder-mips-pocket < ./tests/all-tests.in
+```
+---
 ### Código dos registradores
 - r0
 - r1
