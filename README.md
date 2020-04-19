@@ -57,7 +57,7 @@ A sintaxe para executar instruções do **tipo I** é informar o nome da instru�
 $ ADDI 6
 ```
 ```bash
-# saída 
+# saída para instrução ADDI 6
 $ 001 00110
 ```
 ___
@@ -72,7 +72,7 @@ A sintaxe para executar instruções do **tipo J** é informar o nome da instru�
 $ BEQ r0, r1
 ```
 ```bash
-# saída 
+# saída para instrução BEQ r0, r1
 $ 011 00 01 0
 ```
 **obs**: a virgula entre o código dos registradores é facultativa.  
