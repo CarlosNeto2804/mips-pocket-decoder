@@ -17,13 +17,13 @@ $./bin/decoder-mips-pocket
 # exemplo de execução com testes pré implementados
 $ ./bin/decoder-mips-pocket < ./tests/all-tests.in
 ```
----
+
 ### Código dos registradores
 - r0
 - r1
 - r2
 - r3
-___
+
 
 ### Tipo - R
 Operações aceitas:
@@ -45,7 +45,7 @@ $ ADD r1
 # saída para instrução ADD r1
 $ 000 01 000
 ```
-___
+
 
 ## Tipo - I
 Operações aceitas:
@@ -60,7 +60,7 @@ $ ADDI 6
 # saída para instrução ADDI 6
 $ 001 00110
 ```
-___
+
 
 ## Tipo - J
 Operações aceitas:
@@ -86,4 +86,3 @@ $ BEQ r1 r2
 # saída 
 $ 011 01 10 0
 ```
-___
