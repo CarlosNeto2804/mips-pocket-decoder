@@ -10,7 +10,7 @@ extern struct inst instructions[];
 extern struct regs registers[];
 const char *delim = " ,()";
 
-static const char *opcode_lookup(const char *inst)
+static const char *get_opcode(const char *inst)
 {
     if (inst == NULL)
         return (NULL);
@@ -23,7 +23,7 @@ static const char *opcode_lookup(const char *inst)
     return (NULL);
 }
 
-static const char *register_lookup(const char *register_name)
+static const char *get_register_code(const char *register_name)
 {
     if (register_name == NULL)
         return (NULL);
@@ -43,7 +43,7 @@ static void encode_addi_instruction(FILE *output, const char *inst)
     const char *branch10;
     char branch2[33];
     check((branch10 = strtok(NULL, delim)) != NULL);
-    check((opcode = opcode_lookup(inst)) != NULL);
+    check((opcode = get_opcode(inst)) != NULL);
     itoa2(atoi(branch10), branch2, 2);
     fprintf(output, "%s %s\n", opcode, &branch2[27]);
 }
@@ -52,9 +52,9 @@ static void encode_beq_instruction(FILE *output, const char *inst)
     const char *opcode;
     const char *rt;
     const char *rs;
-    check((rt = register_lookup(strtok(NULL, delim))) != NULL);
-    check((rs = register_lookup(strtok(NULL, delim))) != NULL);
-    check((opcode = opcode_lookup(inst)) != NULL);
+    check((rt = get_register_code(strtok(NULL, delim))) != NULL);
+    check((rs = get_register_code(strtok(NULL, delim))) != NULL);
+    check((opcode = get_opcode(inst)) != NULL);
     fprintf(output, "%s %s %s 0\n", opcode, rt, rs);
 }
 
@@ -62,8 +62,8 @@ static void encode_r_instruction(FILE *output, const char *inst)
 {
     const char *rs;
     const char *opcode;
-    check((rs = register_lookup(strtok(NULL, delim))) != NULL);
-    check((opcode = opcode_lookup(inst)) != NULL);
+    check((rs = get_register_code(strtok(NULL, delim))) != NULL);
+    check((opcode = get_opcode(inst)) != NULL);
     fprintf(output, "%s %s %s\n", opcode, rs, "000");
 }
 
@@ -71,8 +71,8 @@ static void encode_MT_MF_instruction(FILE *output, const char *inst)
 {
     const char *rs;
     const char *opcode;
-    check((rs = register_lookup(strtok(NULL, delim))) != NULL);
-    check((opcode = opcode_lookup(inst)) != NULL);
+    check((rs = get_register_code(strtok(NULL, delim))) != NULL);
+    check((opcode = get_opcode(inst)) != NULL);
     fprintf(output, "%s %s %s\n", opcode, "000" ,rs);
 }
 
@@ -109,7 +109,7 @@ static void encode_mfb(FILE *output, const char *inst){
 }
 static void encode_halt(FILE *output, const char *inst){
     const char *opcode;
-    check((opcode = opcode_lookup(inst)) != NULL);
+    check((opcode = get_opcode(inst)) != NULL);
     fprintf(output, "%s \n", opcode);
 }
 
