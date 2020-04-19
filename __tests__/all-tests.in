@@ -1,0 +1,31 @@
+ADDI 0
+ADDI 1
+ADDI 2
+ADDI 3
+ADDI 4
+ADDI 5
+ADDI 6
+ADDI 7
+ADDI 8
+ADDI 9
+BEQ r0, r1 
+BEQ r0, r2 
+BEQ r0, r3
+BEQ r1, r0 
+BEQ r1, r2 
+BEQ r1, r3 
+BEQ r2, r0 
+BEQ r2, r1 
+BEQ r2, r3 
+BEQ r3, r0 
+BEQ r3, r1 
+BEQ r3, r2 
+ADD r0
+ADD r1
+ADD r2
+ADD r3
+SUB r0
+SUB r1
+SUB r2
+SUB r3
+HALT

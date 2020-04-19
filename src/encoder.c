@@ -10,7 +10,6 @@ extern struct inst instructions[];
 extern struct regs registers[];
 const char *delim = " ,()";
 
-
 static const char *opcode_lookup(const char *inst)
 {
     if (inst == NULL)
@@ -26,19 +25,20 @@ static const char *opcode_lookup(const char *inst)
 
 static const char *register_lookup(const char *register_name)
 {
-	if (register_name == NULL)
-		return (NULL);
+    if (register_name == NULL)
+        return (NULL);
 
-	for (int i = 0; i < REG_NUM; i++)
-	{
-		if (!strcmp(registers[i].name, register_name))
-			return (registers[i].code);
-	}
+    for (int i = 0; i < REG_NUM; i++)
+    {
+        if (!strcmp(registers[i].name, register_name))
+            return (registers[i].code);
+    }
 
-	return (NULL);
+    return (NULL);
 }
 
-static void encode_addi_instruction(FILE *output, const char *inst){
+static void encode_addi_instruction(FILE *output, const char *inst)
+{
     const char *opcode;
     const char *branch10;
     char branch2[33];
@@ -47,30 +47,85 @@ static void encode_addi_instruction(FILE *output, const char *inst){
     itoa2(atoi(branch10), branch2, 2);
     fprintf(output, "%s %s\n", opcode, &branch2[27]);
 }
-static void encode_beq_instruction(FILE *output, const char *inst){
-	const char *opcode;
+static void encode_beq_instruction(FILE *output, const char *inst)
+{
+    const char *opcode;
     const char *rt;
-	const char *rs;
+    const char *rs;
     check((rt = register_lookup(strtok(NULL, delim))) != NULL);
-	check((rs = register_lookup(strtok(NULL, delim))) != NULL);
-	check((opcode = opcode_lookup(inst)) != NULL);
-	fprintf(output, "%s %s %s 0\n", opcode,rt,rs);
+    check((rs = register_lookup(strtok(NULL, delim))) != NULL);
+    check((opcode = opcode_lookup(inst)) != NULL);
+    fprintf(output, "%s %s %s 0\n", opcode, rt, rs);
 }
 
+static void encode_r_instruction(FILE *output, const char *inst)
+{
+    const char *rs;
+    const char *opcode;
+    check((rs = register_lookup(strtok(NULL, delim))) != NULL);
+    check((opcode = opcode_lookup(inst)) != NULL);
+    fprintf(output, "%s %s %s\n", opcode, rs, "000");
+}
+
+static void encode_MT_MF_instruction(FILE *output, const char *inst)
+{
+    const char *rs;
+    const char *opcode;
+    check((rs = register_lookup(strtok(NULL, delim))) != NULL);
+    check((opcode = opcode_lookup(inst)) != NULL);
+    fprintf(output, "%s %s %s\n", opcode, "000" ,rs);
+}
 
 static void encode_addi(FILE *output, const char *inst)
 {
-	encode_addi_instruction(output, inst);
+    encode_addi_instruction(output, inst);
 }
 static void encode_beq(FILE *output, const char *inst)
 {
-	encode_beq_instruction(output, inst);
+    encode_beq_instruction(output, inst);
+}
+static void encode_add(FILE *output, const char *inst)
+{
+    encode_r_instruction(output, inst);
+}
+static void encode_sub(FILE *output, const char *inst)
+{
+    encode_r_instruction(output, inst);
+}
+static void encode_mta(FILE *output, const char *inst){
+    encode_MT_MF_instruction(output,inst);
+}
+static void encode_mtb(FILE *output, const char *inst){
+    encode_MT_MF_instruction(output,inst);
+
+}
+static void encode_mfa(FILE *output, const char *inst){
+    encode_MT_MF_instruction(output,inst);
+
+}
+static void encode_mfb(FILE *output, const char *inst){
+    encode_MT_MF_instruction(output,inst);
+
+}
+static void encode_halt(FILE *output, const char *inst){
+    const char *opcode;
+    check((opcode = opcode_lookup(inst)) != NULL);
+    fprintf(output, "%s \n", opcode);
 }
 
 struct inst instructions[] = {
-	{INST_NAME_ADDI, INST_OPCODE_ADDI,  encode_addi},
-	{INST_NAME_BEQ, INST_OPCODE_BEQ,  encode_beq},
-    {NULL, NULL,  NULL},
+    {INST_NAME_ADD, INST_OPCODE_ADD, encode_add},
+    {INST_NAME_SUB, INST_OPCODE_SUB, encode_sub},
+
+    {INST_NAME_MTA, INST_OPCODE_MTA, encode_mta},
+    {INST_NAME_MTB, INST_OPCODE_MTB, encode_mtb},
+    {INST_NAME_MFA, INST_OPCODE_MFA, encode_mfa},
+    {INST_NAME_MFB, INST_OPCODE_MFB, encode_mfb},
+
+    {INST_NAME_ADDI, INST_OPCODE_ADDI, encode_addi},
+    {INST_NAME_BEQ, INST_OPCODE_BEQ, encode_beq},
+    {INST_NAME_HALT, INST_OPCODE_HALT, encode_halt},
+    {NULL, NULL, NULL},
 };
 
 struct regs registers[] = {
@@ -98,7 +153,7 @@ void encode(FILE *output, FILE *input)
             if (!strcmp(token, instructions[j].name))
             {
                 unkown = 0;
-                instructions[j].encode(output,token);
+                instructions[j].encode(output, token);
                 break;
             }
         }
@@ -108,8 +163,6 @@ void encode(FILE *output, FILE *input)
     }
     free(line);
 }
-
-
 
 // int converter_to_binary(int num)
 // {
@@ -125,11 +178,3 @@ void encode(FILE *output, FILE *input)
 //     }
 //     return bin;
 // }
-// static void encode_add(FILE *output, const char *inst){}
-// static void encode_sub(FILE *output, const char *inst){}
-// static void encode_mta(FILE *output, const char *inst){}
-// static void encode_mtb(FILE *output, const char *inst){}
-// static void encode_mfa(FILE *output, const char *inst){}
-// static void encode_mfb(FILE *output, const char *inst){}
-// static void encode_beq(FILE *output, const char *inst){}
-// static void encode_halt(FILE *output, const char *inst){}

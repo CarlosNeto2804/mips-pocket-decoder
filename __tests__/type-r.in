@@ -1,0 +1,9 @@
+ADD r0
+ADD r1
+ADD r2
+ADD r3
+SUB r0
+SUB r1
+SUB r2
+SUB r3
+HALT
