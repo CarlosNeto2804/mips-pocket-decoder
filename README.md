@@ -25,7 +25,7 @@ $ ./bin/decoder-mips-pocket < ./tests/all-tests.in
 - r3
 
 
-### Tipo - R
+### Instruções Tipo - R
 Operações aceitas:
 - ADD
 - SUB
@@ -47,10 +47,10 @@ $ 000 01 000
 ```
 
 
-## Tipo - I
+### Instruções Tipo - I
 Operações aceitas:
 - ADDI
-### Exemplos
+#### Exemplos
 A sintaxe para executar instruções do **tipo I** é informar o nome da instrução seguida de um número inteiro de 0 a 31:
 ```bash
 # exemplo de entrada 
@@ -62,10 +62,10 @@ $ 001 00110
 ```
 
 
-## Tipo - J
+### Instruções Tipo - J
 Operações aceitas:
 - BEQ
-### Exemplos
+#### Exemplos
 A sintaxe para executar instruções do **tipo J** é informar o nome da instrução e em seguida o codigo de dois registradores:
 ```bash
 # exemplo de entrada 
