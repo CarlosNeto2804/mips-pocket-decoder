@@ -6,4 +6,20 @@ SUB r0
 SUB r1
 SUB r2
 SUB r3
+MTA r0
+MTA r1
+MTA r2
+MTA r3
+MFA r0
+MFA r1
+MFA r2
+MFA r3
+MTB r0
+MTB r1
+MTB r2
+MTB r3
+MFB r0
+MFB r1
+MFB r2
+MFB r3
 HALT

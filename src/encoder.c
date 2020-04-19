@@ -81,7 +81,7 @@ static void encode_MT_MF_B_instruction(FILE *output, const char *inst)
     const char *opcode;
     check((rs = get_register_code(strtok(NULL, delim))) != NULL);
     check((opcode = get_opcode(inst)) != NULL);
-    fprintf(output, "%s %s %s\n", opcode, "000", rs );
+    fprintf(output, "%s %s%s %s\n",opcode, "0", rs, "01");
 }
 
 
